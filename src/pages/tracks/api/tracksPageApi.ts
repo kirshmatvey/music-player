@@ -9,7 +9,14 @@ export const tracksPageApi = basePlayerApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getTracksFromPlaylist: builder.query<TracksResponse, string>({
+      query: (playlistId) => ({
+        url: `playlists/${playlistId}/tracks`,
+        method: "GET",
+      }),
+    }),
   }),
 })
 
-export const { useGetAllTracksQuery } = tracksPageApi
+export const { useGetAllTracksQuery, useGetTracksFromPlaylistQuery } =
+  tracksPageApi

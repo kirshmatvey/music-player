@@ -7,11 +7,11 @@ type Props = {
 
 export const Track = ({ track }: Props) => {
   return (
-    <div className={s.tracksContainer}>
+    <li key={track.id} className={s.track}>
       <span>{track.attributes.title}</span>
       <span>{track.attributes.user.name}</span>
       <span>{track.attributes.addedAt}</span>
       <span>{track.attributes.likesCount}</span>
-    </div>
+    </li>
   )
 }

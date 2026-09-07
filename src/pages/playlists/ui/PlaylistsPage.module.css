@@ -1,0 +1,6 @@
+.playlistsWrapper {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    list-style: none;
+}

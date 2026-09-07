@@ -1,4 +1,5 @@
 import type { TrackData } from "@/entities/track/model/track.types.ts"
+import type { DomainMeta } from "@/shared/types"
 
 export type TracksResponse = {
   data: TrackData[]
@@ -6,13 +7,7 @@ export type TracksResponse = {
   included: TracksIncluded
 }
 
-type TracksMeta = {
-  page: number
-  pageSize: number
-  totalCount: number
-  pagesCount: number
-  nextCursor: string
-}
+type TracksMeta = DomainMeta & { nextCursor: string }
 
 type TracksIncluded = {
   id: string

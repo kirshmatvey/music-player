@@ -1,17 +1,14 @@
 import { useGetAllTracksQuery } from "@/pages/tracks/api/tracksPageApi.ts"
 import { Track } from "@/entities/track/ui/Track.tsx"
+import s from "./TracksPage.module.css"
 
 export const TracksPage = () => {
   const { data } = useGetAllTracksQuery()
   return (
     <>
-      <ul>
+      <ul className={s.tracksWrapper}>
         {data?.data.map((track) => {
-          return (
-            <li key={track.id}>
-              <Track track={track} />
-            </li>
-          )
+          return <Track key={track.id} track={track} />
         })}
       </ul>
     </>

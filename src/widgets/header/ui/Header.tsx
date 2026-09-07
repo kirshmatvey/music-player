@@ -13,7 +13,7 @@ export const Header = () => {
   return (
     <header>
       <nav>
-        <ul>
+        <ul className={s.list}>
           {navItems.map((item) => (
             <li key={item.to}>
               <NavLink

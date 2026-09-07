@@ -3,6 +3,11 @@ export type User = {
   name: string
 }
 
+export type Tags = {
+  id: string
+  name: string
+}
+
 export type Images = {
   main: Cover[]
 }
@@ -22,4 +27,11 @@ export type Cover = {
   height: number
   fileSize: number
   url: string
+}
+
+export type DomainMeta = {
+  page: number
+  pageSize: number
+  totalCount: number
+  pagesCount: number
 }
