@@ -14,10 +14,11 @@ type PlaylistAttributes = {
   order: number
   user: User
   images: Images
-  tags: Tags
+  tags: Tags[]
   likesCount: number
   dislikesCount: number
   currentUserReaction: CurrentUserReaction
   tracksCount: number
   duration: number
+  description: string
 }

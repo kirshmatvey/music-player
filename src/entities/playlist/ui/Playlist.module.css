@@ -1,6 +1,17 @@
 .playlist {
     outline: black solid 1px;
     display: flex;
-    width: 100px;
+    flex-direction: column;
+    width: 20%;
     height: 150px;
+}
+
+.updateButton {
+    display: flex;
+    justify-self: flex-end;
+}
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
 }
