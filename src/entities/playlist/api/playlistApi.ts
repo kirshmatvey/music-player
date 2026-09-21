@@ -1,8 +1,8 @@
-import { basePlayerApi } from "@/shared/api"
+import { baseApi } from "@/shared/api"
 
 import type { UpdatePlaylistArgs } from "./playlistApi.types.ts"
 
-export const playlistApi = basePlayerApi.injectEndpoints({
+export const playlistApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     updatePlaylist: builder.mutation<void, { playlistId: string; body: UpdatePlaylistArgs }>({
       query: ({ playlistId, body }) => ({
@@ -15,14 +15,14 @@ export const playlistApi = basePlayerApi.injectEndpoints({
           },
         },
       }),
-      invalidatesTags: ["Playlists"],
+      invalidatesTags: (_result, error) => (error ? [] : ["Playlists"]),
     }),
-    deletePlaylist: builder.mutation({
+    deletePlaylist: builder.mutation<void, { playlistId: string }>({
       query: ({ playlistId }) => ({
         url: `playlists/${playlistId}`,
         method: "DELETE",
       }),
-      invalidatesTags: (_result, error) => (!error ? ["Playlists"] : ["None"]),
+      invalidatesTags: (_result, error) => (error ? [] : ["Playlists"]),
     }),
   }),
 })

@@ -1,14 +1,15 @@
-import { basePlayerApi } from "@/shared/api"
-import type { PlaylistsResponse } from "@/pages/playlists/api/playlistsPageApi.types.ts"
+import { baseApi } from "@/shared/api"
+import type { FetchAllPlaylistsArgs, PlaylistsResponse } from "@/pages/playlists/api/playlistsPageApi.types.ts"
 import type { PlaylistData } from "@/entities/playlist/model/playlist.types.ts"
 import type { PlaylistFormArgs } from "@/entities/playlist/api/playlistApi.types.ts"
 
-export const playlistsPageApi = basePlayerApi.injectEndpoints({
+export const playlistsPageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPlaylists: builder.query<PlaylistsResponse, void>({
-      query: () => ({
+    fetchAllPlaylists: builder.query<PlaylistsResponse, FetchAllPlaylistsArgs>({
+      query: (params) => ({
         url: "/playlists",
         method: "GET",
+        params,
       }),
       providesTags: ["Playlists"],
     }),
@@ -23,10 +24,9 @@ export const playlistsPageApi = basePlayerApi.injectEndpoints({
           },
         },
       }),
-      invalidatesTags: (result) => (result ? ["Playlists"] : ["None"]),
+      invalidatesTags: (result) => (result ? ["Playlists"] : []),
     }),
   }),
 })
 
-export const { useGetAllPlaylistsQuery, useCreatePlaylistMutation } =
-  playlistsPageApi
+export const { useFetchAllPlaylistsQuery, useCreatePlaylistMutation } = playlistsPageApi

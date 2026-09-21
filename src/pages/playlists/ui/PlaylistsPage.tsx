@@ -1,40 +1,27 @@
-import {
-  useCreatePlaylistMutation,
-  useGetAllPlaylistsQuery,
-} from "@/pages/playlists/api/playlistsPageApi.ts"
+import { useFetchAllPlaylistsQuery } from "@/pages/playlists/api/playlistsPageApi.ts"
 import { Playlist } from "@/entities/playlist/ui/Playlist.tsx"
 import s from "./PlaylistsPage.module.css"
-import { useForm } from "react-hook-form"
-import type { PlaylistFormArgs } from "@/entities/playlist/api/playlistApi.types.ts"
+import { CreatePlaylistForm } from "@/pages/playlists/ui/createPlaylistForm/CreatePlaylistForm.tsx"
+import { Pagination } from "@/shared/components"
+import { useState } from "react"
 
 export const PlaylistsPage = () => {
-  const { data } = useGetAllPlaylistsQuery()
-  const [createPlaylistTrigger] = useCreatePlaylistMutation()
-  const createPlaylistHandler = (data: PlaylistFormArgs) => {
-    createPlaylistTrigger({
-      title: data.title,
-      description: data.description,
-    })
-      .unwrap()
-      .then(() => {
-        reset()
-      })
-  }
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
-  const { register, handleSubmit, reset } = useForm<PlaylistFormArgs>()
+  const { data } = useFetchAllPlaylistsQuery({
+    pageNumber: currentPage,
+    pageSize: 20,
+  })
 
   return (
-    <>
-      <form onSubmit={handleSubmit(createPlaylistHandler)}>
-        <input placeholder={"title"} {...register("title")} />
-        <input placeholder={"description"} {...register("description")} />
-        <button type={"submit"}>create</button>
-      </form>
-      <ul className={s.playlistsWrapper}>
+    <div className={s.playlistsPageContainer}>
+      <CreatePlaylistForm />
+      <ul className={s.playlistsGridContainer}>
         {data?.data.map((playlist) => (
           <Playlist key={playlist.id} playlist={playlist} />
         ))}
       </ul>
-    </>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesCount={data?.meta.pagesCount || 1} />
+    </div>
   )
 }

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router"
 import { Path } from "@/shared/variables/constants.ts"
-import s from "./Header.module.css"
+import s from "./Sidebar.module.css"
 
 const navItems = [
   { to: Path.Main, label: "Main" },
@@ -9,25 +9,20 @@ const navItems = [
   { to: Path.Profile, label: "Profile" },
 ]
 
-export const Header = () => {
+export const Sidebar = () => {
   return (
-    <header>
+    <aside className={s.sidebar}>
       <nav>
         <ul className={s.list}>
           {navItems.map((item) => (
             <li key={item.to}>
-              <NavLink
-                className={({ isActive }) =>
-                  `link ${isActive ? s.activeLink : ""}`
-                }
-                to={item.to}
-              >
+              <NavLink className={({ isActive }) => `link ${isActive ? s.activeLink : ""}`} to={item.to}>
                 {item.label}
               </NavLink>
             </li>
           ))}
         </ul>
       </nav>
-    </header>
+    </aside>
   )
 }

@@ -1,7 +1,11 @@
-.playlistsWrapper {
+.playlistsGridContainer {
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    gap: 15px;
     flex-wrap: wrap;
-    list-style: none;
+    gap: 8px;
+}
+
+.playlistsPageContainer {
+    display: flex;
+    flex-direction: column;
 }

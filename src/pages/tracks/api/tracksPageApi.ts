@@ -1,7 +1,7 @@
-import { basePlayerApi } from "@/shared/api"
+import { baseApi } from "@/shared/api"
 import type { TracksResponse } from "@/pages/tracks/api/tracksPageApi.types.ts"
 
-export const tracksPageApi = basePlayerApi.injectEndpoints({
+export const tracksPageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTracks: builder.query<TracksResponse, void>({
       query: () => ({
@@ -18,5 +18,4 @@ export const tracksPageApi = basePlayerApi.injectEndpoints({
   }),
 })
 
-export const { useGetAllTracksQuery, useGetTracksFromPlaylistQuery } =
-  tracksPageApi
+export const { useGetAllTracksQuery, useGetTracksFromPlaylistQuery } = tracksPageApi

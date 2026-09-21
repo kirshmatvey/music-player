@@ -3,10 +3,14 @@
     padding-left: 100px;
 }
 
+.sidebar {
+    max-width: 310px;
+    width: 100%;
+}
+
 .list {
-    display: flex;
-    gap: 40px;
-    list-style: none;
+    display: grid;
+    grid-auto-rows: auto;
 }
 
 .activeLink {
