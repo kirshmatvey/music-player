@@ -1,6 +1,6 @@
 .app {
     display: grid;
-    grid-template-columns: minmax(150px, 310px) auto;
+    grid-template-columns: 1fr 5fr;
 }
 
 .layout {
@@ -8,5 +8,11 @@
     max-width: 1420px;
     padding: 32px;
     margin: 0 auto;
+}
+
+.pageWrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 80px auto;
 }
 

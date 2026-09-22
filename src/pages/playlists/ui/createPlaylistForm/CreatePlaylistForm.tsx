@@ -13,7 +13,7 @@ export const CreatePlaylistForm = () => {
     })
       .unwrap()
       .then(() => {
-        reset()
+        reset({ title: "", description: "" })
       })
   }
 
