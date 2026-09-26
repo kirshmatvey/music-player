@@ -13,10 +13,10 @@ export const Playlist = ({ playlist }: Props) => {
   const [isBeingEdited, setIsBeingEdited] = useState(false)
   const [deletePlaylist] = useDeletePlaylistMutation()
 
-  const originalImage = playlist.attributes.images.main.find((cover) => {
+  const coverImage = playlist.attributes.images.main.find((cover) => {
     return cover.type === "original"
   })
-  const imageSrc = originalImage ? originalImage.url : defaultCover
+  const coverSrc = coverImage ? coverImage.url : defaultCover
 
   const closeUpdateMenuHandler = () => setIsBeingEdited(false)
   const deletePlaylistHandler = () => {
@@ -32,7 +32,7 @@ export const Playlist = ({ playlist }: Props) => {
         <UpdatePlaylistForm closeMenuHandler={closeUpdateMenuHandler} playlist={playlist} />
       ) : (
         <>
-          <img className={s.playlistCover} src={imageSrc} alt="playlist-cover" />
+          <img className={s.playlistCover} src={coverSrc} alt="playlist-cover" />
           <h3>{playlist.attributes.title}</h3>
           <span>{playlist.attributes.user.name}</span>
           <button className={s.updateButton} onClick={openEditModeHandler}>

@@ -4,6 +4,7 @@ import App from "../App.tsx"
 import { BrowserRouter } from "react-router"
 import { Provider } from "react-redux"
 import { store } from "@/app/store/store.ts"
+import '@fontsource/lato'
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>

@@ -12,6 +12,9 @@ export const baseApi = createApi({
       return headers
     },
   }),
-  tagTypes: ["Playlists"],
+  tagTypes: ["Playlists", "Tracks"],
+  keepUnusedDataFor: 5,
+  // refetchOnFocus: true, todo: включить потом
+  // refetchOnReconnect: true, todo: включить потом
   endpoints: () => ({}),
 })

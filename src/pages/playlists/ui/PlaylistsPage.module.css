@@ -1,13 +1,13 @@
-.playlistsContainer {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    overflow-y: scroll;
-    max-height: 60vh;
-}
-
 .playlistsPageContainer {
     display: flex;
     flex-direction: column;
+}
+
+.playlistsContainer {
+    max-height: 60vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 265px));
 }

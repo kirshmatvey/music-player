@@ -6,11 +6,11 @@ export const TracksPage = () => {
   const { data } = useGetAllTracksQuery()
   return (
     <>
-      <ul className={s.tracksWrapper}>
+      <ol className={s.tracksWrapper}>
         {data?.data.map((track) => {
           return <Track key={track.id} track={track} />
         })}
-      </ul>
+      </ol>
     </>
   )
 }

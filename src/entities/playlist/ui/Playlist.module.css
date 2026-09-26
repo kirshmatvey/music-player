@@ -1,16 +1,9 @@
 .playlist {
-    outline: #fff solid 1px;
-    display: grid;
+    background: rgba(7, 7, 7, 0.8);
     gap: 4px;
     padding: 8px;
-    width: 230px;
-    flex-grow: 1;
     max-width: 265px;
-}
-
-.updateButton {
-    display: flex;
-    justify-self: flex-end;
+    aspect-ratio: 93/100;
 }
 
 .formWrapper {
@@ -23,5 +16,4 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
-    aspect-ratio: 3/2;
 }

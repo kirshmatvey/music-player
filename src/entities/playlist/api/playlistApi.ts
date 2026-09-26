@@ -3,8 +3,8 @@ import { baseApi } from "@/shared/api"
 import type { UpdatePlaylistArgs } from "./playlistApi.types.ts"
 
 export const playlistApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    updatePlaylist: builder.mutation<void, { playlistId: string; body: UpdatePlaylistArgs }>({
+  endpoints: (build) => ({
+    updatePlaylist: build.mutation<void, { playlistId: string; body: UpdatePlaylistArgs }>({
       query: ({ playlistId, body }) => ({
         url: `playlists/${playlistId}`,
         method: "PUT",
@@ -17,7 +17,7 @@ export const playlistApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (_result, error) => (error ? [] : ["Playlists"]),
     }),
-    deletePlaylist: builder.mutation<void, { playlistId: string }>({
+    deletePlaylist: build.mutation<void, { playlistId: string }>({
       query: ({ playlistId }) => ({
         url: `playlists/${playlistId}`,
         method: "DELETE",

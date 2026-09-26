@@ -4,8 +4,8 @@ import type { PlaylistData } from "@/entities/playlist/model/playlist.types.ts"
 import type { PlaylistFormArgs } from "@/entities/playlist/api/playlistApi.types.ts"
 
 export const playlistsPageApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    fetchAllPlaylists: builder.query<PlaylistsResponse, FetchAllPlaylistsArgs>({
+  endpoints: (build) => ({
+    fetchAllPlaylists: build.query<PlaylistsResponse, FetchAllPlaylistsArgs>({
       query: (params) => ({
         url: "/playlists",
         method: "GET",
@@ -13,7 +13,7 @@ export const playlistsPageApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Playlists"],
     }),
-    createPlaylist: builder.mutation<{ data: PlaylistData }, PlaylistFormArgs>({
+    createPlaylist: build.mutation<{ data: PlaylistData }, PlaylistFormArgs>({
       query: (body) => ({
         url: "/playlists",
         method: "POST",

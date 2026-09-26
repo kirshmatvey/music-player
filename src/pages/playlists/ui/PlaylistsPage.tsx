@@ -1,9 +1,8 @@
 import { useFetchAllPlaylistsQuery } from "@/pages/playlists/api/playlistsPageApi.ts"
 import { Playlist } from "@/entities/playlist/ui/Playlist.tsx"
 import s from "./PlaylistsPage.module.css"
-import { CreatePlaylistForm } from "@/pages/playlists/ui/createPlaylistForm/CreatePlaylistForm.tsx"
 import { Pagination, SearchBar } from "@/shared/components"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export const PlaylistsPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -17,12 +16,16 @@ export const PlaylistsPage = () => {
   const { data } = useFetchAllPlaylistsQuery({
     search,
     pageNumber: currentPage,
-    pageSize: 20,
-  })
+    pageSize: 15,
+  },
+  //   {
+  //   pollingInterval: 3000,
+  //   skipPollingIfUnfocused: true,
+  // } todo: включить потом
+  )
 
   return (
     <div className={s.playlistsPageContainer}>
-      <CreatePlaylistForm />
       <SearchBar callback={searchPlaylists} />
       <ul className={s.playlistsContainer}>
         {data?.data.map((playlist) => (
