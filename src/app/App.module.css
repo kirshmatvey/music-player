@@ -1,7 +1,6 @@
 .app {
     display: grid;
     grid-template-columns: minmax(200px, 310px) auto;
-
     max-width: 1730px;
     margin: 0 auto;
 }
@@ -18,5 +17,7 @@
     height: 100vh;
     display: grid;
     grid-template-rows: var(--header-height) auto;
+    overflow-y: scroll;
+    position: relative;
 }
 

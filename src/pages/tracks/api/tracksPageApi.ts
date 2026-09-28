@@ -3,14 +3,21 @@ import type { TracksResponse } from "@/pages/tracks/api/tracksPageApi.types.ts"
 
 export const tracksPageApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllTracks: build.query<TracksResponse, void>({
-      query: () => ({
-        url: "playlists/tracks",
-        method: "GET",
-      }),
-      providesTags: ['Tracks']
+    fetchTracks: build.infiniteQuery<TracksResponse, void, string | undefined>({
+      infiniteQueryOptions: {
+        initialPageParam: undefined,
+        getNextPageParam: lastPage => {
+          return lastPage.meta.nextCursor || undefined
+        },
+      },
+      query: ({ pageParam }) => {
+        return {
+          url: 'playlists/tracks',
+          params: { cursor: pageParam, pageSize: 10, paginationType: 'cursor' },
+        }
+      },
     }),
-    getTracksFromPlaylist: build.query<TracksResponse, string>({
+    fetchTracksFromPlaylist: build.query<TracksResponse, string>({
       query: (playlistId) => ({
         url: `playlists/${playlistId}/tracks`,
         method: "GET",
@@ -19,4 +26,4 @@ export const tracksPageApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetAllTracksQuery, useGetTracksFromPlaylistQuery } = tracksPageApi
+export const { useFetchTracksInfiniteQuery, useFetchTracksFromPlaylistQuery } = tracksPageApi

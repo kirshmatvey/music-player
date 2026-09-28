@@ -22,6 +22,7 @@ export const Track = ({ track }: Props) => {
   const [dislikeTrigger] = useToggleTrackDislikeMutation()
   const [removeReactionTrigger] = useRemoveTrackReactionMutation()
 
+  // проверка лайкнут ли трек
   const isLiked = track.attributes.currentUserReaction === 1
   const isDisliked = track.attributes.currentUserReaction === -1
 

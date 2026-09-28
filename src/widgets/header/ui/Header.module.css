@@ -7,4 +7,7 @@
     align-items: center;
     justify-content: flex-end;
     padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }

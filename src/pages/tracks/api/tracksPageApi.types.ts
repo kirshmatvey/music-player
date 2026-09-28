@@ -16,3 +16,18 @@ type TracksIncluded = {
     name: string
   }
 }
+
+export type FetchTracksArgs = {
+  pageNumber?: number
+  pageSize?: number
+  search?: string
+  sortBy?: 'publishedAt' | 'likesCount'
+  sortDirection?: 'asc' | 'desc'
+  tagsIds?: string[]
+  artistsIds?: string[]
+  userId?: string
+  includeDrafts?: boolean
+  paginationType?: 'offset' | 'cursor'
+  cursor?: string
+}
+
