@@ -10,7 +10,7 @@ import {
   useToggleTrackDislikeMutation,
   useToggleTrackLikeMutation
 } from "@/entities/track/api/trackApi.ts"
-import { curriedUserReactionHandler } from "@/shared/utils/userReactionHandler.ts"
+import { userReactionHandler } from "@/shared/utils/userReactionHandler.ts"
 
 type Props = {
   track: TrackData
@@ -37,7 +37,12 @@ export const Track = ({ track }: Props) => {
   // обрезаем название трека, если оно больше 25 символов
   const trackTitle = track.attributes.title.length > 25 ? track.attributes.title.slice(0, 22) + '...' : track.attributes.title
 
-  const userReactionHandler = curriedUserReactionHandler(removeReactionTrigger, likeTrigger, dislikeTrigger, track.id)
+  const curriedUserReactionHandler = userReactionHandler({
+    removeReactionHandler: removeReactionTrigger,
+    likeHandler: likeTrigger,
+    dislikeHandler: dislikeTrigger,
+    itemId: track.id
+  })
 
   return (
     <li key={track.id} className={s.track}>
@@ -48,12 +53,12 @@ export const Track = ({ track }: Props) => {
       </div>
       <div>
         <img src={isLikedSrc} alt="is-liked" onClick={() => {
-          userReactionHandler(1, track.attributes.currentUserReaction)
+          curriedUserReactionHandler({ purpose: 1, currentReaction: track.attributes.currentUserReaction })
         }} />
         <span>{track.attributes.likesCount}</span>
       </div>
       <img src={isDislikedSrc} alt="is-disliked" onClick={() => {
-        userReactionHandler(-1, track.attributes.currentUserReaction)
+        curriedUserReactionHandler({ purpose: -1, currentReaction: track.attributes.currentUserReaction })
       }} />
       <span>{timeFromISO}</span>
     </li>

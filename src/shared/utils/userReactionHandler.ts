@@ -1,24 +1,33 @@
 import type { CurrentUserReaction } from "@/shared/variables"
-import { curry } from "@/shared/utils/curry.ts"
 
 type ReactionHandler = (arg: { trackId: string }) => void
 
-const userReactionHandler = (
-  removeReactionHandler: ReactionHandler,
+type Props = {
+  removeReactionHandler: ReactionHandler
   likeHandler: ReactionHandler,
   dislikeHandler: ReactionHandler,
-  trackId: string,
-  purpose: 1 | -1, // like | dislike
-  currentReaction: CurrentUserReaction,
-) => {
-  if (currentReaction && purpose === currentReaction) {
-    removeReactionHandler({ trackId })
-  } else if (purpose === 1) {
-    likeHandler({ trackId })
-  } else {
-    dislikeHandler({ trackId })
-  }
+  itemId: string,
 }
 
-export const curriedUserReactionHandler = curry(userReactionHandler)
+type InnerProps = {
+  purpose: 1 | -1, // like | dislike
+  currentReaction: CurrentUserReaction
+}
+
+// Функция-декоратор, которая принимает сначала 4 аргумента и запоминает их (так как при каждом использовании функции
+// эти аргументы предположительно локально будут одинаковыми), чтобы в будущем не передавать их повторно.
+export const userReactionHandler = ({
+                                             removeReactionHandler,
+                                             likeHandler,
+                                             dislikeHandler,
+                                             itemId
+                                           }: Props) => function inner({ purpose, currentReaction }: InnerProps) {
+  if (currentReaction && purpose === currentReaction) {
+    removeReactionHandler({ trackId: itemId })
+  } else if (purpose === 1) {
+    likeHandler({ trackId: itemId })
+  } else {
+    dislikeHandler({ trackId: itemId })
+  }
+}
 

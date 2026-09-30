@@ -5,7 +5,7 @@ import type { PlaylistFormArgs } from "@/entities/playlist/api/playlistApi.types
 
 export const playlistsPageApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchAllPlaylists: build.query<PlaylistsResponse, FetchAllPlaylistsArgs>({
+    fetchPlaylists: build.query<PlaylistsResponse, FetchAllPlaylistsArgs>({
       query: (params) => ({
         url: "/playlists",
         method: "GET",
@@ -29,4 +29,4 @@ export const playlistsPageApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useFetchAllPlaylistsQuery, useCreatePlaylistMutation } = playlistsPageApi
+export const { useFetchPlaylistsQuery, useCreatePlaylistMutation } = playlistsPageApi

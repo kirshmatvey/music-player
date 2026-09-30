@@ -1,4 +1,4 @@
-import { useFetchAllPlaylistsQuery } from "@/pages/playlists/api/playlistsPageApi.ts"
+import { useFetchPlaylistsQuery } from "@/pages/playlists/api/playlistsPageApi.ts"
 import { Playlist } from "@/entities/playlist/ui/Playlist.tsx"
 import s from "./PlaylistsPage.module.css"
 import { Pagination, SearchBar } from "@/shared/components"
@@ -13,7 +13,7 @@ export const PlaylistsPage = () => {
     setSearch(value)
   }
 
-  const { data } = useFetchAllPlaylistsQuery({
+  const { data } = useFetchPlaylistsQuery({
     search,
     pageNumber: currentPage,
     pageSize: 15,

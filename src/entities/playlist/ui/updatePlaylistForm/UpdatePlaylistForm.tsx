@@ -22,10 +22,7 @@ export const UpdatePlaylistForm = ({ closeMenuHandler, playlist }: Props) => {
         tagIds: playlist.attributes.tags.map((tag) => tag.id),
       },
     })
-      .unwrap()
-      .then(() => {
-        closeMenuHandler()
-      })
+    closeMenuHandler()
   }
 
   return (
