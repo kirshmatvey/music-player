@@ -5,15 +5,18 @@ import { Header } from "@/widgets"
 import { useGlobalLoading } from "@/shared/hooks/useGlobalLoading.ts"
 import { LinearProgress } from "@/shared/components"
 import { ToastContainer } from "react-toastify"
+import { useGetMeQuery } from "@/shared/api/authApi/authApi.ts"
 
 function App() {
   const isGlobalLoaderActive = useGlobalLoading()
+
+  const {data} = useGetMeQuery()
 
   return (
     <div className={s.app}>
       <Sidebar />
       <div className={s.pageWrapper}>
-        <Header />
+        <Header isAuthorized={!!data} login={data?.login || ''}/>
         {isGlobalLoaderActive && <LinearProgress/>}
         <div className={s.layout}>
           <Routing />

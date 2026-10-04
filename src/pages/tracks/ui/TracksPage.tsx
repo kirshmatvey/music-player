@@ -7,6 +7,7 @@ import { LoadingTrigger } from "@/shared/components/loadingTrigger/LoadingTrigge
 export const TracksPage = () => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useFetchTracksInfiniteQuery()
+  console.log('enter')
 
   const { observerRef } = useInfiniteScroll({ hasNextPage, isFetching, fetchNextPage })
 

@@ -1,16 +1,5 @@
-export type User = {
-  id: string
-  name: string
-}
-
-export type Tags = {
-  id: string
-  name: string
-}
-
-export type Images = {
-  main: Cover[]
-}
+import { coverSchema, DomainMetaSchema, imagesSchema, tagSchema, userSchema } from "@/shared/schemas"
+import z from "zod"
 
 export type Artists = {
   data: ArtistData[]
@@ -21,17 +10,9 @@ export type ArtistData = {
   type: string
 }
 
-export type Cover = {
-  type: "original" | "medium" | "thumbnail"
-  width: number
-  height: number
-  fileSize: number
-  url: string
-}
+export type DomainMeta = z.infer<typeof DomainMetaSchema>
 
-export type DomainMeta = {
-  page: number
-  pageSize: number
-  totalCount: number
-  pagesCount: number
-}
+export type Tag = z.infer<typeof tagSchema>
+export type User = z.infer<typeof userSchema>
+export type Cover = z.infer<typeof coverSchema>
+export type Images = z.infer<typeof imagesSchema>

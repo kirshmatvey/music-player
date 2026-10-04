@@ -1,7 +1,7 @@
 import { baseApi } from "@/shared/api"
 import type { FetchAllPlaylistsArgs, PlaylistsResponse } from "@/pages/playlists/api/playlistsPageApi.types.ts"
-import type { PlaylistData } from "@/entities/playlist/model/playlist.types.ts"
-import type { PlaylistFormArgs } from "@/entities/playlist/api/playlistApi.types.ts"
+import { playlistsResponseSchema } from "@/pages/playlists/model/playlistPage.schemas.ts"
+import { catchWithZod } from "@/shared/utils/catchWithZod.ts"
 
 export const playlistsPageApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -11,22 +11,10 @@ export const playlistsPageApi = baseApi.injectEndpoints({
         method: "GET",
         params,
       }),
+      ...catchWithZod(playlistsResponseSchema),
       providesTags: ["Playlists"],
-    }),
-    createPlaylist: build.mutation<{ data: PlaylistData }, PlaylistFormArgs>({
-      query: (body) => ({
-        url: "/playlists",
-        method: "POST",
-        body: {
-          data: {
-            type: "playlists",
-            attributes: body,
-          },
-        },
-      }),
-      invalidatesTags: (result) => (result ? ["Playlists"] : []),
     }),
   }),
 })
 
-export const { useFetchPlaylistsQuery, useCreatePlaylistMutation } = playlistsPageApi
+export const { useFetchPlaylistsQuery } = playlistsPageApi

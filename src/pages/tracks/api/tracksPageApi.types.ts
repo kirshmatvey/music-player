@@ -1,21 +1,7 @@
-import type { TrackData } from "@/entities/track/model/track.types.ts"
-import type { DomainMeta } from "@/shared/types"
+import { type fetchTracksResponseSchema } from "@/pages/tracks/api/tracksPageApi.schemas.ts"
+import z from "zod"
 
-export type TracksResponse = {
-  data: TrackData[]
-  meta: TracksMeta
-  included: TracksIncluded
-}
-
-type TracksMeta = DomainMeta & { nextCursor: string }
-
-type TracksIncluded = {
-  id: string
-  type: string
-  attributes: {
-    name: string
-  }
-}
+export type FetchTracksResponse = z.infer<typeof fetchTracksResponseSchema>
 
 export type FetchTracksArgs = {
   pageNumber?: number
